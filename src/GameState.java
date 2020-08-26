@@ -36,7 +36,7 @@ public class GameState {
         energyLevels = gameInfoResponse.energyLevels;
         availableResidenceBuildings = gameInfoResponse.availableResidenceBuildings;
         availableUtilityBuildings = gameInfoResponse.availableUtilityBuildings;
-        availableUpgrades = gameInfoResponse.availableUpgrade;
+        availableUpgrades = gameInfoResponse.availableUpgrades;
         effects = gameInfoResponse.effects;
     }
 

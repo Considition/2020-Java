@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import models.*;
 
 public class GameLayer {
@@ -25,7 +26,7 @@ public class GameLayer {
 	 * @return The id for the new game
 	 */
 	public String newGame(String map) {
-		String mapName = "{\"mapName\":" + map + "}";
+		String mapName = "{\"mapName\":" + gson.toJson(map) + "}";
 		gameState = new GameState(Api.newGame(apiKey, mapName));
 		return gameState.gameId;
 	}
@@ -60,7 +61,7 @@ public class GameLayer {
 	 */
 	public void startBuild(String buildingName, Position position, String gameId) {
 		String pos = gson.toJson((position), Position.class);
-		String foundation = "{\"position\": " + pos + ",\"buildingName\": " + buildingName + "}";
+		String foundation = "{\"position\": " + pos + ",\"buildingName\": " + gson.toJson(buildingName) + "}";
 		gameState.UpdateGameState(Api.startBuild(apiKey, foundation, gameId));
 	}
 

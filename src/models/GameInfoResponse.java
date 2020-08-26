@@ -2,9 +2,6 @@ package models;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class GameInfoResponse{
     public String gameId ;
     public String mapName;
@@ -15,7 +12,7 @@ public class GameInfoResponse{
     public List<BlueprintUtilityBuilding> availableUtilityBuildings ;
     public double maxTemp;
     public double minTemp;
-    public List<Upgrade> availableUpgrade;
+    public List<Upgrade> availableUpgrades;
     public List<Effect> effects;
 }
 

@@ -1,14 +1,13 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.GameInfoResponse;
-import models.GameStateResponse;
-import models.GamesResponse;
-import models.ScoreResponse;
+import models.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.IOException;
 
 public class Api {
     private static final String BasePath = "https://game.considition.com/api/game/";
@@ -60,7 +59,7 @@ public class Api {
         return null;
     }
 
-    public static GameStateResponse startBuild(String apiKey, String gameId, String foundation) {
+    public static GameStateResponse startBuild(String apiKey, String foundation, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/startBuild");
@@ -82,7 +81,7 @@ public class Api {
 
     }
 
-    public static GameStateResponse build(String apiKey, String gameId, String pos) {
+    public static GameStateResponse build(String apiKey, String pos, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/build");
@@ -104,7 +103,7 @@ public class Api {
 
     }
 
-    public static GameStateResponse demolish(String apiKey, String gameId, String body) {
+    public static GameStateResponse demolish(String apiKey, String body, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/demolish");
@@ -148,7 +147,7 @@ public class Api {
 
     }
 
-    public static GameStateResponse maintenance(String apiKey, String gameId, String pos) {
+    public static GameStateResponse maintenance(String apiKey, String pos, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/maintenance");
@@ -170,7 +169,7 @@ public class Api {
 
     }
 
-    public static GameStateResponse adjustEnergy(String apiKey, String gameId, String body) {
+    public static GameStateResponse adjustEnergy(String apiKey, String body, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/adjustEnergy");
@@ -192,7 +191,7 @@ public class Api {
 
     }
 
-    public static GameStateResponse buyUpgrade(String apiKey, String gameId, String body) {
+    public static GameStateResponse buyUpgrade(String apiKey, String body, String gameId) {
 
         try {
 			URL url = new URL(BasePath + "action/buyUpgrade");
@@ -339,14 +338,15 @@ public class Api {
             String response = output;
             return response;
         } else {
-            throw new IOException("Http error with code " + con.getResponseCode() + " and message: ");
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            String response = br.readLine();
+            throw new IOException("Http error with code " + con.getResponseCode() + " and message: " + response);
         }
 
     }
 
 
     private static String doPost(HttpURLConnection con, String body) throws IOException {
-        String response = "";
         con.setRequestMethod("POST");
         con.setDoOutput(true);
         con.setDoInput(true);
@@ -360,10 +360,13 @@ public class Api {
 
         if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            response = br.readLine();
+            String response = br.readLine();
+            return response;
+        } else {
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            String response = br.readLine();
+            throw new IOException("Http error with code " + con.getResponseCode() + " and message: " + response);
         }
-
-        return response;
     }
 
 

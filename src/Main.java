@@ -1,8 +1,5 @@
 //TODO install com.google.gson
-
-import models.BlueprintResidenceBuilding;
-import models.BuiltResidenceBuilding;
-import models.Position;
+import models.*;
 
 public class Main {
     private static String apiKey = "";                              // TODO: Enter your API key here
@@ -12,6 +9,7 @@ public class Main {
 
     Main() {
         gameLayer = new GameLayer(apiKey);
+        gameLayer.endGame();
         String gameId = gameLayer.newGame(map);
         System.out.println("Starting game: " + gameId);
         gameLayer.startGame(gameId);
@@ -19,7 +17,7 @@ public class Main {
             takeTurn(gameId);
         }
         System.out.println("Done with game: " + gameId);
-        System.out.println("Final score was: " + gameLayer.getScore(gameId));
+        System.out.println("Final score was: " + gameLayer.getScore(gameId).FinalScore);
     }
 
     private void takeTurn(String gameId) {
