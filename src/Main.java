@@ -17,7 +17,7 @@ public class Main {
             takeTurn(gameId);
         }
         System.out.println("Done with game: " + gameId);
-        System.out.println("Final score was: " + gameLayer.getScore(gameId).FinalScore);
+        System.out.println("Final score was: " + gameLayer.getScore(gameId).finalScore);
     }
 
     private void takeTurn(String gameId) {
