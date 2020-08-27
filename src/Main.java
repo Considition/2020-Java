@@ -9,7 +9,6 @@ public class Main {
 
     Main() {
         gameLayer = new GameLayer(apiKey);
-        gameLayer.endGame();
         String gameId = gameLayer.newGame(map);
         System.out.println("Starting game: " + gameId);
         gameLayer.startGame(gameId);
