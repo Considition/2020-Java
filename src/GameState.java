@@ -31,7 +31,7 @@ public class GameState {
         mapName = gameInfoResponse.mapName;
         maxTurns = gameInfoResponse.maxTurns;
         maxTemp = gameInfoResponse.maxTemp;
-        maxTemp = gameInfoResponse.minTemp;
+        minTemp = gameInfoResponse.minTemp;
         map = gameInfoResponse.map;
         energyLevels = gameInfoResponse.energyLevels;
         availableResidenceBuildings = gameInfoResponse.availableResidenceBuildings;
